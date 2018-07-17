@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>2048</title>
+</head>
+<body BGCOLOR = "#FFB6C1">
+<script>
+// Типа матрица поля
+    function matrixArray(rows, columns){
+        gameField = new Array();
+        for(var i=0; i<rows; i++){
+            gameField[i] = new Array();
+            for(var j=0; j< columns; j++){
+                gameField[i][j] = 0;
+            }
+        }
+        return gameField;
+    }
+    var gameField = matrixArray(FIELDSIZE,FIELDSIZE);
+
+
+
+// Типа смотрим что нажали
+    var keyboard;
+    function Direction(key){
+
+        addEventListener("keydown", Direction);
+
+        switch(key.keyCode){
+
+            case 37:  // если нажата клавиша влево
+//что-то делаем
+                break;
+            case 38:   // если нажата клавиша вверх
+
+                break;
+            case 39:   // если нажата клавиша вправо
+
+                break;
+            case 40:   // если нажата клавиша вниз
+
+                break;
+        }
+    }
+    //Типа взяли из предыдущей что-то
+    function Move(direction){
+        var Curr = 1;
+        switch(direction){
+
+            case "left":  // если нажата клавиша влево
+                for(var i=0; i<FIELDSIZE; i++) {
+                    for (var j = 1; j < FIELDSIZE; j ++) {
+                        if (gameField[i][j] !== 0) {
+                            while (gameField[i][j - Curr] === 0 && j - Curr !== 0) {
+                                Curr++;
+                            }
+                            if (Curr !== 0) {//useless??
+                                if (gameField[i][j - Curr] === 0 || gameField[i][j - Curr] === gameField[i][j]) {
+                                    gameField[i][j - Curr] += gameField[i][j];
+                                    gameField[i][j] = 0;
+                                    SCORE += gameField[i][j - Curr];
+                                } else {
+                                    if (Curr !== 1) {
+                                        gameField[i][j - Curr + 1] += gameField[i][j];
+                                        gameField[i][j] = 0;
+                                    }
+                                }
+                            }
+                        }
+                        Curr = 1;//сбросить здесь?
+                    }
+                }
+                break;
+            case "up":   // если нажата клавиша вверх
+                for(var i=1; i<FIELDSIZE; i++) {
+                    for (var j = 0; j < FIELDSIZE; j++) {
+                        if (gameField[i][j] !== 0) {
+                            while (gameField[i - Curr][j] === 0 && i - Curr !== 0) {
+                                Curr++;
+                            }
+                            if (Curr !== 0) {//think about it
+                                if (gameField[i - Curr][j] === 0 || gameField[i- Curr][j] === gameField[i][j]) {
+                                    gameField[i- Curr][j] += gameField[i][j];
+                                    gameField[i][j] = 0;
+                                    SCORE += gameField[i- Curr][j];
+                                } else {
+                                    if(Curr !== 1) {
+                                        gameField[i - Curr + 1][j] += gameField[i][j];
+                                        gameField[i][j] = 0;
+                                    }
+                                }
+                            }
+                        }
+                        Curr = 1;//сбросить здесь?
+                    }
+                }
+                break;
+            case "right":   // если нажата клавиша вправо
+                for(var i=0; i<FIELDSIZE; i++) {
+                    for (var j = FIELDSIZE-2; j >= 0; j--) {
+                        if (gameField[i][j] !== 0) {
+                            while (gameField[i][j + Curr] === 0 && j + Curr !== FIELDSIZE-1) {
+                                Curr++;
+                            }
+                            if (Curr !== 0) {//it's useless i'm sure
+                                if (gameField[i][j + Curr] === 0 || gameField[i][j + Curr] === gameField[i][j]) {
+                                    gameField[i][j + Curr] += gameField[i][j];
+                                    gameField[i][j] = 0;
+                                    SCORE += gameField[i][j + Curr];
+                                } else {
+                                    if(Curr !== 1) {
+                                        gameField[i][j + Curr - 1] += gameField[i][j];
+                                        gameField[i][j] = 0;
+                                    }
+                                }
+                            }
+                        }
+                        Curr = 1;//сбросить здесь?
+                    }
+                }
+                break;
+            case "down":   // если нажата клавиша вниз
+                for(var i=FIELDSIZE-2; i>=0; i--) {
+                    for (var j = 0; j < FIELDSIZE; j++) {
+                        if (gameField[i][j] !== 0) {
+                            while (gameField[i + Curr][j] === 0 && i + Curr !== FIELDSIZE-1) {
+                                Curr++;
+                            }
+                            if (Curr !== 0) {
+                                if (gameField[i + Curr][j] === 0 || gameField[i + Curr][j] === gameField[i][j]) {
+                                    gameField[i + Curr][j] += gameField[i][j];
+                                    gameField[i][j] = 0;
+                                    SCORE += gameField[i + Curr][j];
+                                } else {
+                                    if(Curr !== 1) {
+                                        gameField[i + Curr - 1][j] += gameField[i][j];
+                                        gameField[i][j] = 0;
+                                    }
+                                }
+                            }
+                        }
+                        Curr = 1;//сбросить здесь?
+                    }
+                }
+                break;
+        }
+    }
+
+
+
+
+
+</script>
+</body>
+</html>
