@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <title>2048</title>
     <script>
+
+
         function init() {
             let canvas = document.getElementById("matrix");
             canvas.width = 500;
@@ -34,19 +36,17 @@
 
 
             context.strokeStyle = "#F00";
-            context.font = "80px AR DELANEY";
-            //context.shadowOffsetX = 5;
-            //context.shadowOffsetY = 5;
-            //context.shadowBlur = 5;
-            //context.strokeWidth(20);
-            context.strokeText("2", 30, 480);
-            context.strokeText("2", 130, 480 );
-            context.strokeText("4", 230, 480);
-            context.strokeText("4", 330, 480);
-            context.strokeText("8", 430, 480);
-            //let img = new Image();
-            //img.src = "2.jpg";
-            //context.drawImage(img, 10, 10);
+            context.font = "30px AR DELANEY";
+
+
+
+            context.strokeText("2", 40, 465);
+            context.strokeText("4", 140, 465 );
+            context.strokeText("8", 240, 465);
+            context.strokeText("16", 335, 465);
+            context.strokeText("32", 435, 465);
+            context.strokeText("1024", 317, 365);
+            context.strokeText("2048", 213, 365);
         }
 
     </script>
@@ -58,6 +58,13 @@
             margin-top: 4px;
             height: 30px;
             width: 30px;
+            cursor: pointer;
+        }
+        .pic{
+            margin-left: 364px;
+            margin-top: 4px;
+            height: 100px;
+            width: 100px;
             cursor: pointer;
         }
 
@@ -72,17 +79,16 @@
 function show(state){
 
     document.getElementById('window').style.display = state;
+    document.getElementById('windowEnd').style.display = state;
     document.getElementById('wrap').style.display = state;
 }
 </script>
 
-<!-- Задний прозрачный фон-->
 <div onclick="show('none')" id="wrap"></div>
 
-<!-- Само окно-->
 <div id="window">
 
-    <img class="close" onclick="show('none')" src="p1.jpg">
+    <img class="close" onclick="show('none')" src="p1.png">
 
     <left><h3><b><font size="4" face="AR DELANEY" color="#f59500">Описание игры</font></b><br>
         <font size="4" face="AR DELANEY" color="#f59500">Какое-то описание игры...</font>
