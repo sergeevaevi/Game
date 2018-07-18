@@ -9,11 +9,15 @@
     const FIELDSIZE = 4;
 
     function CheckEmptyCells() {
+        //console.log('CHrck');
         let flag = false;
-        for (let i = 0; i < rows; i++) {
-            for (let j = 0; j < columns; j++){
+        for (let i = 0; i < FIELDSIZE; i++) {
+            for (let j = 0; j < FIELDSIZE; j++){
                 if(gameField[i][j] === 0){
+                    EmptyX = j;
+                    EmptyY = i;
                     flag = true;
+                   // console.log('X, Y' + EmptyX, EmptyY);
                 }
             }
         }
@@ -23,47 +27,43 @@
     function IsEmpty(Y, X) {
         return(gameField[Y][X] === 0);
     }
-
     function ShowMatrixArray(rows){
         for(let i=0; i<rows; i++){
                 console.log(gameField[i]);
         }
         console.log('');
     }
-
     function Random(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
-
     function RandomDeg() {
         return Math.floor(Math.random()*2) + 1;
     }
-
     function EndGame() {
-        if(!CheckEmptyCells){
+        //console.log("EndGAme");
+
+        if(!CheckEmptyCells()){
             //2048?
             //Can't move
         }
     }
-
     function AddNewCell() {
         EndGame();
         var X = Random(0, FIELDSIZE-1);
         var Y = Random(0, FIELDSIZE-1);
         console.log(X, Y);
         if(IsEmpty(Y, X)) {
-            gameField[Y][X] = RandomDeg();
-            console.log(gameField[Y][X]);
+            gameField[Y][X] = Math.pow(2, RandomDeg());
+        }else{
+            EndGame();
+            gameField[EmptyY][EmptyX] = Math.pow(2, RandomDeg());
         }
     }
-
-
     function AddFirstCell() {
         AddNewCell();
         AddNewCell();
     }
-
-// Типа матрица поля
+//  матрица поля
     function CreateMatrixArray(rows, columns){
         gameField = new Array();
         for(let i=0; i<rows; i++){
@@ -75,20 +75,16 @@
         return gameField;
     }
 
-
     var gameField = CreateMatrixArray(FIELDSIZE,FIELDSIZE);
-
     var keyboard;
     var SCORE = 0;
+    var EmptyX;
+    var EmptyY;
     AddFirstCell();
-
-
-// Типа смотрим что нажали
-
+//  смотрим что нажали
     function Direction(key){
         var direction;
         switch(key.keyCode){
-
             case 37:  // если нажата клавиша влево
                 // что-то делаем
                 direction = 'left';
@@ -105,7 +101,6 @@
         }
         return Move(direction);
     }
-
     addEventListener("keydown", Direction);
 
     //Типа взяли из предыдущей что-то
@@ -220,7 +215,6 @@
         }
         ShowMatrixArray(FIELDSIZE);
     }
-
 </script>
 </body>
 </html>
