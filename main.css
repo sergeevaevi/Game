@@ -1,0 +1,45 @@
+
+.button2048 {
+    display: inline-block;
+    color: green;
+    text-decoration: none;
+    padding: .5em 2em;
+    outline: none;
+    border-width: 2px 0;
+    border-style: solid none;
+    border-color: #FDBE33 #000 #D77206;
+    border-radius: 6px;
+    background: linear-gradient(#F3AE0F, #E38916) #E38916;
+    transition: 0.2s;
+}
+.button2048:hover { background: linear-gradient(#f5ae00, #f59500) #f5ae00; }
+.button2048:active { background: linear-gradient(#f59500, #f5ae00) #f59500; }
+
+#wrap{
+    display: none;
+    opacity: 0.8;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    padding: 16px;
+    background-color: rgba(1, 1, 1, 0.725);
+    z-index: 100;
+    overflow: auto;
+}
+
+#window{
+    width: 400px;
+    height: 400px;
+    margin: 50px auto;
+    display: none;
+    background: #FFEFD5;
+    z-index: 200;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    padding: 16px;
+}
