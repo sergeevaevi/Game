@@ -6,8 +6,33 @@
 </head>
 <body BGCOLOR = "#FFB6C1">
 <script>
+
+    function ShowMatrixArray(rows){
+        for(var i=0; i<rows; i++){
+                console.log(gameField[i]);
+        }
+        console.log('');
+    }
+
+    function Random(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function AddNewCell() {
+        EndGame();
+
+    }
+
+    function AddFirstCell() {
+        AddNewCell();
+        AddNewCell();
+    }
+
+
+
+    const FIELDSIZE = 4;
 // Типа матрица поля
-    function matrixArray(rows, columns){
+    function CreateMatrixArray(rows, columns){
         gameField = new Array();
         for(var i=0; i<rows; i++){
             gameField[i] = new Array();
@@ -17,32 +42,38 @@
         }
         return gameField;
     }
-    var gameField = matrixArray(FIELDSIZE,FIELDSIZE);
 
+
+    var gameField = CreateMatrixArray(FIELDSIZE,FIELDSIZE);
+
+    var keyboard;
 
 
 // Типа смотрим что нажали
-    var keyboard;
+
     function Direction(key){
-
-        addEventListener("keydown", Direction);
-
+        var direction;
         switch(key.keyCode){
 
             case 37:  // если нажата клавиша влево
-//что-то делаем
+                // что-то делаем
+                direction = 'left';
                 break;
             case 38:   // если нажата клавиша вверх
-
+                direcrtion = 'up';
                 break;
             case 39:   // если нажата клавиша вправо
-
+                direction = 'right';
                 break;
             case 40:   // если нажата клавиша вниз
-
+                direction = 'down';
                 break;
         }
+        return Move(direction);
     }
+
+    addEventListener("keydown", Direction);
+
     //Типа взяли из предыдущей что-то
     function Move(direction){
         var Curr = 1;
@@ -59,7 +90,7 @@
                                 if (gameField[i][j - Curr] === 0 || gameField[i][j - Curr] === gameField[i][j]) {
                                     gameField[i][j - Curr] += gameField[i][j];
                                     gameField[i][j] = 0;
-                                    SCORE += gameField[i][j - Curr];
+                                    SCORE += gameField[i][j - Curr];//check
                                 } else {
                                     if (Curr !== 1) {
                                         gameField[i][j - Curr + 1] += gameField[i][j];
@@ -71,6 +102,8 @@
                         Curr = 1;//сбросить здесь?
                     }
                 }
+              //  AddNewCell();
+               // EndOfGame();
                 break;
             case "up":   // если нажата клавиша вверх
                 for(var i=1; i<FIELDSIZE; i++) {
@@ -95,6 +128,8 @@
                         Curr = 1;//сбросить здесь?
                     }
                 }
+              //  AddNewCell();
+               // EndOfGame();
                 break;
             case "right":   // если нажата клавиша вправо
                 for(var i=0; i<FIELDSIZE; i++) {
@@ -119,6 +154,8 @@
                         Curr = 1;//сбросить здесь?
                     }
                 }
+               // AddNewCell();
+              //  EndOfGame();
                 break;
             case "down":   // если нажата клавиша вниз
                 for(var i=FIELDSIZE-2; i>=0; i--) {
@@ -143,13 +180,12 @@
                         Curr = 1;//сбросить здесь?
                     }
                 }
+              //  AddNewCell();
+               // EndOfGame();
                 break;
         }
+        ShowMatrixArray(FIELDSIZE);
     }
-
-
-
-
 
 </script>
 </body>
