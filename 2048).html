@@ -25,22 +25,14 @@
             context.strokeStyle = "#F00";
             context.font = "30px AR DELANEY";
             var low = 2;
-           /* context.strokeText(low, 40, 465);
-            context.strokeText("4", 140, 465 );
-            context.strokeText("8", 240, 465);
-            context.strokeText("16", 335, 465);
-            context.strokeText("32", 435, 465);
-            context.strokeText("1024", 317, 365);
-            context.strokeText("2048", 213, 365);*/
             function DrawNumber(number, posX, posY) {
+
                 context.fillStyle = "#FAFAD2";
                 context.fillRect(posX*100+1, posY*100+1, 80, 80);
                 context.strokeText(number, (posX+1)*100 -60, (posY+1)*100 -40);
 
 
             }
-
-
 
             const FIELDSIZE = 5;
 
@@ -146,7 +138,7 @@
                 var Curr = 1;
                 switch(direction){
 
-                    case "left":  // если нажата клавиша влево
+                    case "up":  // если нажата клавиша влево
                         for(var i=0; i<FIELDSIZE; i++) {
                             for (var j = 1; j < FIELDSIZE; j ++) {
                                 if (gameField[i][j] !== 0) {
@@ -156,7 +148,7 @@
                                     if (Curr !== 0) {//useless??
                                         if (gameField[i][j - Curr] === 0 || gameField[i][j - Curr] === gameField[i][j]) {
                                             gameField[i][j - Curr] += gameField[i][j];
-                                            DrawNumber(gameField[i][j - Curr], j - Curr, i);
+                                            DrawNumber(gameField[i][j - Curr], i, j - Curr);
                                             gameField[i][j] = 0;
                                             DrawNumber('', i, j);
                                             SCORE += gameField[i][j - Curr];//check
@@ -176,22 +168,26 @@
                         AddNewCell();
                         // EndOfGame();
                         break;
-                    case "up":   // если нажата клавиша вверх
+                    case "left":   // если нажата клавиша вверх
                         for(var i=1; i<FIELDSIZE; i++) {
                             for (var j = 0; j < FIELDSIZE; j++) {
                                 if (gameField[i][j] !== 0) {
                                     while (gameField[i - Curr][j] === 0 && i - Curr !== 0) {
                                         Curr++;
                                     }
-                                    if (Curr !== 0) {//think about it
+                                    if (Curr !== 0) {
                                         if (gameField[i - Curr][j] === 0 || gameField[i- Curr][j] === gameField[i][j]) {
                                             gameField[i- Curr][j] += gameField[i][j];
+                                            DrawNumber(gameField[i - Curr][j], i - Curr, j);
                                             gameField[i][j] = 0;
+                                            DrawNumber('', i, j);
                                             SCORE += gameField[i- Curr][j];
                                         } else {
                                             if(Curr !== 1) {
                                                 gameField[i - Curr + 1][j] += gameField[i][j];
+                                                DrawNumber(gameField[i - Curr + 1][j], i - Curr + 1, j);
                                                 gameField[i][j] = 0;
+                                                DrawNumber('', i, j);
                                             }
                                         }
                                     }
@@ -202,7 +198,7 @@
                         AddNewCell();
                         // EndOfGame();
                         break;
-                    case "right":   // если нажата клавиша вправо
+                    case "down":   // если нажата клавиша вправо
                         for(var i=0; i<FIELDSIZE; i++) {
                             for (var j = FIELDSIZE-2; j >= 0; j--) {
                                 if (gameField[i][j] !== 0) {
@@ -212,12 +208,16 @@
                                     if (Curr !== 0) {//it's useless i'm sure
                                         if (gameField[i][j + Curr] === 0 || gameField[i][j + Curr] === gameField[i][j]) {
                                             gameField[i][j + Curr] += gameField[i][j];
+                                            DrawNumber(gameField[i][j + Curr], i, j + Curr);
                                             gameField[i][j] = 0;
+                                            DrawNumber('', i, j);
                                             SCORE += gameField[i][j + Curr];
                                         } else {
                                             if(Curr !== 1) {
                                                 gameField[i][j + Curr - 1] += gameField[i][j];
+                                                DrawNumber(gameField[i][j + Curr - 1], i, j + Curr - 1);
                                                 gameField[i][j] = 0;
+                                                DrawNumber('', i, j);
                                             }
                                         }
                                     }
@@ -228,7 +228,7 @@
                         AddNewCell();
                         //  EndOfGame();
                         break;
-                    case "down":   // если нажата клавиша вниз
+                    case "right":   // если нажата клавиша вниз
                         for(var i=FIELDSIZE-2; i>=0; i--) {
                             for (var j = 0; j < FIELDSIZE; j++) {
                                 if (gameField[i][j] !== 0) {
@@ -238,12 +238,16 @@
                                     if (Curr !== 0) {
                                         if (gameField[i + Curr][j] === 0 || gameField[i + Curr][j] === gameField[i][j]) {
                                             gameField[i + Curr][j] += gameField[i][j];
+                                            DrawNumber(gameField[i + Curr][j], i + Curr, j);
                                             gameField[i][j] = 0;
+                                            DrawNumber('', i, j);
                                             SCORE += gameField[i + Curr][j];
                                         } else {
                                             if(Curr !== 1) {
                                                 gameField[i + Curr - 1][j] += gameField[i][j];
+                                                DrawNumber(gameField[i + Curr - 1][j], i + Curr - 1, j);
                                                 gameField[i][j] = 0;
+                                                DrawNumber('', i, j);
                                             }
                                         }
                                     }
@@ -498,9 +502,7 @@
 <h1><left><font size="9" face="AR DELANEY" color="red">2048</font></left></h1>
 <canvas id="matrix">
 </canvas>
-<script>init();
-
-
+<script>  init();
 
 //Функция показа
 function show(state){
