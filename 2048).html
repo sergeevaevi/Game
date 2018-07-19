@@ -28,8 +28,9 @@
             function DrawNumber(number, posX, posY) {
 
                 context.fillStyle = "#FAFAD2";
-                context.fillRect(posX*100+1, posY*100+1, 80, 80);
-                context.strokeText(number, (posX+1)*100 -60, (posY+1)*100 -40);
+                context.fillRect(posX*100+1, posY*100+1, 99, 99);
+                context.textAlign = 'center';
+                context.strokeText(number, (posX+1)*100-50, (posY+1)*100-50);
 
 
             }
