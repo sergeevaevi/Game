@@ -24,7 +24,7 @@
             context.stroke();
             context.strokeStyle = "#F00";
             context.font = "30px AR DELANEY";
-            function DrawNumber(number, posX, posY) {
+            function DrawNumber(number, posY, posX) {
 
                 context.fillStyle = "#FAFAD2";
                 context.fillRect(posX*100+1, posY*100+1, 98, 98);
@@ -138,7 +138,7 @@
                 var Curr = 1;
                 switch(direction){
 
-                    case "up":  // если нажата клавиша влево
+                    case "left":  // если нажата клавиша влево
                         for(var i=0; i<FIELDSIZE; i++) {
                             for (var j = 1; j < FIELDSIZE; j ++) {
                                 if (gameField[i][j] !== 0) {
@@ -168,7 +168,7 @@
                         AddNewCell();
                         // EndOfGame();
                         break;
-                    case "left":   // если нажата клавиша вверх
+                    case "up":   // если нажата клавиша вверх
                         for(var i=1; i<FIELDSIZE; i++) {
                             for (var j = 0; j < FIELDSIZE; j++) {
                                 if (gameField[i][j] !== 0) {
@@ -198,7 +198,7 @@
                         AddNewCell();
                         // EndOfGame();
                         break;
-                    case "down":   // если нажата клавиша вправо
+                    case "right":   // если нажата клавиша вправо
                         for(var i=0; i<FIELDSIZE; i++) {
                             for (var j = FIELDSIZE-2; j >= 0; j--) {
                                 if (gameField[i][j] !== 0) {
@@ -228,7 +228,7 @@
                         AddNewCell();
                         //  EndOfGame();
                         break;
-                    case "right":   // если нажата клавиша вниз
+                    case "down":   // если нажата клавиша вниз
                         for(var i=FIELDSIZE-2; i>=0; i--) {
                             for (var j = 0; j < FIELDSIZE; j++) {
                                 if (gameField[i][j] !== 0) {
