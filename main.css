@@ -43,3 +43,18 @@
     bottom: 0;
     padding: 16px;
 }
+canvas { border: 5px solid grey }
+.close{
+    margin-left: 364px;
+    margin-top: 4px;
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+}
+.pic{
+    margin-left: 364px;
+    margin-top: 4px;
+    height: 100px;
+    width: 100px;
+    cursor: pointer;
+}
