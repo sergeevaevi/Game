@@ -284,7 +284,12 @@ function Direction(key) {
         case 40:   // если нажата клавиша вниз
             direction = 'down';
             break;
+        default:
+            direction = 'none';
+            break;
+
     }
+    if(direction === 'none') return;
     return Move(direction);
 }
 
