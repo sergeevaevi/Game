@@ -14,23 +14,30 @@ var context = canvas.getContext("2d");
 canvas.width = 500;
 canvas.height = 500;
 
-var s = 1234567890;
-var score = document.getElementById("scoreId");
-score.innerHTML = "Score: "+s;
+
+function ShowScore() {
+    var score = document.getElementById("scoreId");
+    score.innerHTML = "Score: " + SCORE;
+}
 
 function show(state) {
     document.getElementById('window').style.display = state;
     document.getElementById('wrap').style.display = state;
 }
-function showWindowEnd(dis){
+
+function showWindowEnd(dis) {
     document.getElementById('GameOverWindow').style.display = dis;
     document.getElementById('wrap2').style.display = dis;
 }
-function showWindowWin(win){
+
+function showWindowWin(win) {
     document.getElementById('YouWinWindow').style.display = win;
     document.getElementById('wrap3').style.display = win;
 }
-function delay(){document.location.reload();}
+
+function delay() {
+    document.location.reload();
+}
 
 
 function RandomDegree() {
@@ -64,7 +71,7 @@ function DrawBackground() {
     context.font = "30px AR DELANEY";
     for (let i = 0; i < notflying.length; i++) {
         if (gameField[notflying[i][1]][notflying[i][2]] !== 0) {
-          //  context.fillStyle = "blue";
+            //  context.fillStyle = "blue";
             context.fillRect(notflying[i][2] * CELLSIZE + 1, notflying[i][1] * CELLSIZE + 1, CELLSIZE - 2, CELLSIZE - 2);
         }
         DrawNumber(notflying[i][0], notflying[i][1], notflying[i][2]);
@@ -104,6 +111,7 @@ function Filing(Y, X) {
 
 function AddNewCell() {
     EndGame();
+    ShowScore();
     var X = Random(0, FIELDSIZE - 1);
     var Y = Random(0, FIELDSIZE - 1);
     console.log(X, Y);
@@ -115,10 +123,11 @@ function AddNewCell() {
     }
 }
 
-function EndGame(){
+function EndGame() {
     if (!CheckEmptyCells()) {
-        for(let i = 0; i<FIELDSIZE; i++)
-            for(let j = 0; j<FIELDSIZE; j++){
+        for (let i = 0; i < FIELDSIZE; i++)
+            for (let j = 0; j < FIELDSIZE; j++) {
+                //           if(i - )
             }
     }
 }
@@ -146,10 +155,12 @@ function Move(direction) {
                         Curr++;
                     }
                     if (gameField[i][j - Curr] === 0 || gameField[i][j - Curr] === gameField[i][j]) {
+                        if (gameField[i][j - Curr] != 0)
+                            SCORE += gameField[i][j - Curr];//check
                         gameField[i][j - Curr] += gameField[i][j];
                         moves.push([i, j, i, j - Curr]);
                         flying.push(gameField[i][j]);
-                        SCORE += gameField[i][j - Curr];//check
+
                     } else {
                         if (Curr === 1) {
                             notflying.push([gameField[i][j], i, j]);
@@ -177,10 +188,11 @@ function Move(direction) {
                         Curr++;
                     }
                     if (gameField[i - Curr][j] === 0 || gameField[i - Curr][j] === gameField[i][j]) {
+                        if (gameField[i - Curr][j] != 0)
+                            SCORE += gameField[i- Curr][j];//check
                         gameField[i - Curr][j] += gameField[i][j];
                         moves.push([i, j, i - Curr, j]);
                         flying.push(gameField[i][j]);
-                        SCORE += gameField[i - Curr][j];
                     } else {
                         if (Curr === 1) {
                             notflying.push([gameField[i][j], i, j]);
@@ -208,10 +220,11 @@ function Move(direction) {
                         Curr++;
                     }
                     if (gameField[i][j + Curr] === 0 || gameField[i][j + Curr] === gameField[i][j]) {
+                        if (gameField[i][j + Curr] != 0)
+                            SCORE += gameField[i][j + Curr];//check
                         gameField[i][j + Curr] += gameField[i][j];
                         moves.push([i, j, i, j + Curr]);
                         flying.push(gameField[i][j]);
-                        SCORE += gameField[i][j + Curr];
                     } else {
                         if (Curr === 1) {
                             notflying.push([gameField[i][j], i, j]);
@@ -239,10 +252,11 @@ function Move(direction) {
                         Curr++;
                     }
                     if (gameField[i + Curr][j] === 0 || gameField[i + Curr][j] === gameField[i][j]) {
+                        if (gameField[i + Curr][j] != 0)
+                            SCORE += gameField[i + Curr][j];//check
                         gameField[i + Curr][j] += gameField[i][j];
                         moves.push([i, j, i + Curr, j]);
                         flying.push(gameField[i][j]);
-                        SCORE += gameField[i + Curr][j];
                     } else {
                         if (Curr === 1) {
                             notflying.push([gameField[i][j], i, j]);
@@ -268,7 +282,7 @@ function Move(direction) {
         }
         for (let j = 0; j < moves.length; j++) {
             let x1 = moves[j][0], y1 = moves[j][1], x2 = moves[j][2], y2 = moves[j][3];
-            if (Math.abs(x1 - x2) < delta && Math.abs(y1 - y2) < delta){
+            if (Math.abs(x1 - x2) < delta && Math.abs(y1 - y2) < delta) {
                 notflying.push([gameField[x2][y2], x2, y2])
                 moves.splice(j, 1);
                 flying.splice(j, 1);
@@ -312,7 +326,7 @@ function Direction(key) {
             direction = 'none';
             break;
     }
-    if(direction === 'none' || moves.length != 0) return;
+    if (direction === 'none' || moves.length != 0) return;
     return Move(direction);
 }
 
