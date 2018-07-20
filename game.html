@@ -9,14 +9,16 @@
 
 <div class="imgblock" style="float:left; margin-right:50px; margin-top:50px;">
     <img src="SCORE.png" >
-    <h2><span>SCORE:  </span></h2>
+    <h2><span>SCORE:</span></h2>
 </div>
 <h1><font size="9" face="AR DELANEY" color="yellow">2048</font></h1>
 <canvas id="matrix"></canvas>
 <script src="init.js"></script>
 
 <!-- Задний прозрачный фон-->
-<div onclick="show('none')" id="wrap"></div>
+<div onclick="show('none')" id="wrap1"></div>
+<div onclick="showWindowWin('none')" id="wrap2"></div>
+<div onclick="showWindowEnd('none')" id="wrap3"></div>
 
 <!-- Само окно-->
 <div id="window">
@@ -39,7 +41,25 @@
 
 </div>
 
-<button class="button2048" onclick="show('block')"><font size="4" face="AR DELANEY" color="black">Правила игры</font></button>
+<div id="GameOverWindow">
+    <div class="clip-text clip-text_game_over clip-text--cover">GAME OVER</div>
+    <center><button class="button2048" onclick="delay()">
+        <font class="buttonText" face="AR DELANEY" color="black">Новая игра</font></button>
+    </center>
+</div>
+
+<div id="YouWinWindow">
+    <div class="clip-text clip-text_you_win  clip-text--cover">YOU WIN!</div>
+    <center><button class="button2048" onclick="delay()">
+        <font class="buttonText" face="AR DELANEY" color="black">Новая игра</font></button>
+    <button class="button2048" onclick="showWindowWin('none')">
+        <font class="buttonText" face="AR DELANEY" color="black">Продолжить</font></button>
+    </center>
+</div>
+
+<button class="button2048" onclick="show('block')"><font size="4" face="AR DELANEY" color="black">Rules</font></button>
+<button class="button2048" onclick="showWindowEnd('block')"><font size="4" face="AR DELANEY" color="black">Game Over</font></button>
+<button class="button2048" onclick="showWindowWin('block')"><font size="4" face="AR DELANEY" color="black">You Win</font></button>
 
 </body>
 </html>
