@@ -8,6 +8,7 @@ var keyboard;
 var SCORE = 0;
 var EmptyX;
 var EmptyY;
+var moves = [];
 var canvas = document.getElementById("matrix");
 var context = canvas.getContext("2d");
 canvas.width = 500;
@@ -44,6 +45,7 @@ function DrawBackground() {
     context.font = "30px AR DELANEY";
     for (let i = 0; i < notflying.length; i++) {
         if (gameField[notflying[i][1]][notflying[i][2]] !== 0) {
+          //  context.fillStyle = "blue";
             context.fillRect(notflying[i][2] * CELLSIZE + 1, notflying[i][1] * CELLSIZE + 1, CELLSIZE - 2, CELLSIZE - 2);
         }
         DrawNumber(notflying[i][0], notflying[i][1], notflying[i][2]);
@@ -106,7 +108,6 @@ function AddFirstCell() {
 
 function Move(direction) {
     notflying.splice(0, notflying.length);
-    let moves = [];
     let dx = 0, dy = 0;
     const delta = 0.1;
     switch (direction) {
@@ -125,7 +126,7 @@ function Move(direction) {
                     if (gameField[i][j - Curr] === 0 || gameField[i][j - Curr] === gameField[i][j]) {
                         gameField[i][j - Curr] += gameField[i][j];
                         moves.push([i, j, i, j - Curr]);
-                        flying.push([gameField[i][j], gameField[i][j - Curr]]);
+                        flying.push(gameField[i][j]);
                         SCORE += gameField[i][j - Curr];//check
                     } else {
                         if (Curr === 1) {
@@ -134,7 +135,7 @@ function Move(direction) {
                         }
                         gameField[i][j - Curr + 1] += gameField[i][j];
                         moves.push([i, j, i, j - Curr + 1]);
-                        flying.push([gameField[i][j], gameField[i][j]]);
+                        flying.push(gameField[i][j]);
                     }
                     gameField[i][j] = 0;
                 }
@@ -156,7 +157,7 @@ function Move(direction) {
                     if (gameField[i - Curr][j] === 0 || gameField[i - Curr][j] === gameField[i][j]) {
                         gameField[i - Curr][j] += gameField[i][j];
                         moves.push([i, j, i - Curr, j]);
-                        flying.push([gameField[i][j], gameField[i - Curr][j]]);
+                        flying.push(gameField[i][j]);
                         SCORE += gameField[i - Curr][j];
                     } else {
                         if (Curr === 1) {
@@ -165,7 +166,7 @@ function Move(direction) {
                         }
                         gameField[i - Curr + 1][j] += gameField[i][j];
                         moves.push([i, j, i - Curr + 1, j]);
-                        flying.push([gameField[i][j], gameField[i][j]]);
+                        flying.push(gameField[i][j]);
                     }
                     gameField[i][j] = 0;
                 }
@@ -187,7 +188,7 @@ function Move(direction) {
                     if (gameField[i][j + Curr] === 0 || gameField[i][j + Curr] === gameField[i][j]) {
                         gameField[i][j + Curr] += gameField[i][j];
                         moves.push([i, j, i, j + Curr]);
-                        flying.push([gameField[i][j], gameField[i][j + Curr]]);
+                        flying.push(gameField[i][j]);
                         SCORE += gameField[i][j + Curr];
                     } else {
                         if (Curr === 1) {
@@ -196,7 +197,7 @@ function Move(direction) {
                         }
                         gameField[i][j + Curr - 1] += gameField[i][j];
                         moves.push([i, j, i, j + Curr - 1]);
-                        flying.push([gameField[i][j], gameField[i][j]]);
+                        flying.push(gameField[i][j]);
                     }
                     gameField[i][j] = 0;
                 }
@@ -218,7 +219,7 @@ function Move(direction) {
                     if (gameField[i + Curr][j] === 0 || gameField[i + Curr][j] === gameField[i][j]) {
                         gameField[i + Curr][j] += gameField[i][j];
                         moves.push([i, j, i + Curr, j]);
-                        flying.push([gameField[i][j], gameField[i + Curr][j]]);
+                        flying.push(gameField[i][j]);
                         SCORE += gameField[i + Curr][j];
                     } else {
                         if (Curr === 1) {
@@ -227,7 +228,7 @@ function Move(direction) {
                         }
                         gameField[i + Curr - 1][j] += gameField[i][j];
                         moves.push([i, j, i + Curr - 1, j]);
-                        flying.push([gameField[i][j], gameField[i][j]]);
+                        flying.push(gameField[i][j]);
                     }
                     gameField[i][j] = 0;
                 }
@@ -236,27 +237,26 @@ function Move(direction) {
             break;
     }
     let timer = setInterval(function () {
-        console.log('!'+timer);
         context.clearRect(0, 0, canvas.width, canvas.height);
         DrawBackground(); // нарисуем все ячейки которые не двигались
         if (moves.length === 0) {
             clearInterval(timer);
-            console.log('?'+timer);
             DrawBackground();
             AddNewCell();
         }
         for (let j = 0; j < moves.length; j++) {
-            if (Math.abs(((moves[j][2]) - moves[j][0])) < delta && Math.abs(((moves[j][1]) - moves[j][3])) < delta)  {
-                notflying.push([gameField[moves[j][2]][moves[j][3]], moves[j][2], moves[j][3]])
+            let x1 = moves[j][0], y1 = moves[j][1], x2 = moves[j][2], y2 = moves[j][3];
+            if (Math.abs(x1 - x2) < delta && Math.abs(y1 - y2) < delta){
+                notflying.push([gameField[x2][y2], x2, y2])
                 moves.splice(j, 1);
                 flying.splice(j, 1);
                 continue;
             }
-            DrawNumber(flying[j][0], moves[j][0], moves[j][1]);
+            DrawNumber(flying[j], x1, y1);
             moves[j][0] += dy;
             moves[j][1] += dx;
         }
-    }, 30);
+    }, 5);
     ShowMatrix(FIELDSIZE);
 }
 
@@ -289,9 +289,8 @@ function Direction(key) {
         default:
             direction = 'none';
             break;
-
     }
-    if(direction === 'none') return;
+    if(direction === 'none' || moves.length != 0) return;
     return Move(direction);
 }
 
@@ -303,10 +302,9 @@ function init() {
 
 init();
 
-//Функция показа
-function show(state){
+function show(state) {
     document.getElementById('window').style.display = state;
-    document.getElementById('wrap1').style.display = state;
+    document.getElementById('wrap').style.display = state;
 }
 function showWindowEnd(dis){
     document.getElementById('GameOverWindow').style.display = dis;
