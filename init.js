@@ -303,7 +303,17 @@ function init() {
 
 init();
 
-function show(state) {
+//Функция показа
+function show(state){
     document.getElementById('window').style.display = state;
-    document.getElementById('wrap').style.display = state;
+    document.getElementById('wrap1').style.display = state;
 }
+function showWindowEnd(dis){
+    document.getElementById('GameOverWindow').style.display = dis;
+    document.getElementById('wrap2').style.display = dis;
+}
+function showWindowWin(win){
+    document.getElementById('YouWinWindow').style.display = win;
+    document.getElementById('wrap3').style.display = win;
+}
+function delay(){document.location.reload();}
