@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="main.css" type="text/css">
+    <meta charset="UTF-8">
+    <title>2048</title>
+</head>
+<body BGCOLOR = "#90ee90">
+<h1><left><font size="9" face="AR DELANEY" color="red">2048</font></left></h1>
+<canvas id="matrix"></canvas>
+<script src="init.js"></script>
+
+<!-- Задний прозрачный фон-->
+<div onclick="show('none')" id="wrap"></div>
+
+<!-- Само окно-->
+<div id="window">
+
+    <img class="close" onclick="show('none')" src="p1.png">
+
+    <left>
+        <h3>
+            <b><font size="4" face="AR DELANEY" color="#f59500">Описание игры</font></b><br>
+            <font size="4" face="AR DELANEY" color="#f59500">Какое-то описание игры...</font>
+        </h3>
+    </left>
+    <center>
+        <button class="button2048" onclick="show('none')"><font size="4" face="AR DELANEY" color="red">Вернуться к игре</font></button>
+    </center>
+
+</div>
+
+<left>
+    <button class="button2048" onclick="show('block')">
+    <font size="4" face="AR DELANEY" color="red">Описание игры</font></button>
+</left>
+
+
+
+</body>
+</html>
