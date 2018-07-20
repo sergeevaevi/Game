@@ -14,6 +14,10 @@ var context = canvas.getContext("2d");
 canvas.width = 500;
 canvas.height = 500;
 
+var s = 1234567890;
+var score = document.getElementById("scoreId");
+score.innerHTML = "Score: "+s;
+
 function show(state) {
     document.getElementById('window').style.display = state;
     document.getElementById('wrap').style.display = state;
