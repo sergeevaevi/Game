@@ -14,6 +14,21 @@ var context = canvas.getContext("2d");
 canvas.width = 500;
 canvas.height = 500;
 
+function show(state) {
+    document.getElementById('window').style.display = state;
+    document.getElementById('wrap').style.display = state;
+}
+function showWindowEnd(dis){
+    document.getElementById('GameOverWindow').style.display = dis;
+    document.getElementById('wrap2').style.display = dis;
+}
+function showWindowWin(win){
+    document.getElementById('YouWinWindow').style.display = win;
+    document.getElementById('wrap3').style.display = win;
+}
+function delay(){document.location.reload();}
+
+
 function RandomDegree() {
     return Math.floor(Math.random() * 2) + 1;
 }
@@ -96,8 +111,11 @@ function AddNewCell() {
     }
 }
 
-function EndGame() {
+function EndGame(){
     if (!CheckEmptyCells()) {
+        for(let i = 0; i<FIELDSIZE; i++)
+            for(let j = 0; j<FIELDSIZE; j++){
+            }
     }
 }
 
@@ -302,16 +320,3 @@ function init() {
 
 init();
 
-function show(state) {
-    document.getElementById('window').style.display = state;
-    document.getElementById('wrap').style.display = state;
-}
-function showWindowEnd(dis){
-    document.getElementById('GameOverWindow').style.display = dis;
-    document.getElementById('wrap2').style.display = dis;
-}
-function showWindowWin(win){
-    document.getElementById('YouWinWindow').style.display = win;
-    document.getElementById('wrap3').style.display = win;
-}
-function delay(){document.location.reload();}
