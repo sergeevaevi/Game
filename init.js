@@ -236,11 +236,12 @@ function Move(direction) {
             break;
     }
     let timer = setInterval(function () {
-        console.log(notflying);
+        console.log('!'+timer);
         context.clearRect(0, 0, canvas.width, canvas.height);
         DrawBackground(); // нарисуем все ячейки которые не двигались
         if (moves.length === 0) {
             clearInterval(timer);
+            console.log('?'+timer);
             DrawBackground();
             AddNewCell();
         }
@@ -248,13 +249,14 @@ function Move(direction) {
             if (Math.abs(((moves[j][2]) - moves[j][0])) < delta && Math.abs(((moves[j][1]) - moves[j][3])) < delta)  {
                 notflying.push([gameField[moves[j][2]][moves[j][3]], moves[j][2], moves[j][3]])
                 moves.splice(j, 1);
+                flying.splice(j, 1);
                 continue;
             }
             DrawNumber(flying[j][0], moves[j][0], moves[j][1]);
             moves[j][0] += dy;
             moves[j][1] += dx;
         }
-    }, 10);
+    }, 30);
     ShowMatrix(FIELDSIZE);
 }
 
