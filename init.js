@@ -55,13 +55,13 @@ function DrawNumber(number, posY, posX) {
         YouWin = true;
         showWindowWin('block');
     }
-    context.fillStyle = "#FAFAD2";
+    context.fillStyle = "lightskyblue";
     context.textAlign = 'center';
     context.strokeText(number, (posX + 1) * CELLSIZE - CELLSIZE / 2, (posY + 1) * CELLSIZE - CELLSIZE / 2);
 }
 
 function DrawBackground() {
-    context.fillStyle = "#FAFAD2";
+    context.fillStyle = "lightskyblue";
     context.fillRect(0, 0, canvas.width, canvas.height);
     for (let x = CELLSIZE; x < 5 * CELLSIZE; x += CELLSIZE) {
         context.moveTo(x, 0);
@@ -71,9 +71,9 @@ function DrawBackground() {
         context.moveTo(0, y);
         context.lineTo(500, y);
     }
-    context.strokeStyle = "#808080";
+    context.strokeStyle = "darkblue";
     context.stroke();
-    context.strokeStyle = "#F00";
+    context.strokeStyle = "darkblue";
     context.font = "30px AR DELANEY";
     for (let i = 0; i < notflying.length; i++) {
         if (gameField[notflying[i][1]][notflying[i][2]] !== 0) {
