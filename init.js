@@ -9,6 +9,7 @@ var keyboard;
 var SCORE = 0;
 var EmptyX;
 var EmptyY;
+var keyboard = false;
 var moves = [];
 var dir = [-1, 0, 1, 0, 0, -1, 0, 1];
 var canvas = document.getElementById("matrix");
@@ -16,7 +17,6 @@ var context = canvas.getContext("2d");
 canvas.width = 500;
 canvas.height = 500;
 var YouWin = false;
-var speed = 0;
 
 function ShowScore() {
     var score = document.getElementById("scoreId");
@@ -109,7 +109,7 @@ function CheckEmptyCells() {
     return flag;
 }
 
-function FilingCell(Y, X) {
+function AddNumber(Y, X) {
     gameField[Y][X] = Math.pow(2, RandomDegree());
     DrawNumber(gameField[Y][X], Y, X);
     notflying.push([gameField[Y][X], Y, X])
@@ -121,11 +121,10 @@ function AddNewCell() {
     var X = Random(0, FIELDSIZE - 1);
     var Y = Random(0, FIELDSIZE - 1);
     if (IsEmpty(Y, X)) {
-        FilingCell(Y, X);
+        AddNumber(Y, X);
     } else {
-        FilingCell(EmptyY, EmptyX);
+        AddNumber(EmptyY, EmptyX);
     }
-    speed++;
 }
 
 function CheckEdge(i, j, v, h) {
@@ -181,10 +180,12 @@ function LetItMoves(i, j, Curr_i, Curr_j, Curr, offset_i, offset_j) {
 }
 
 function Move(direction) {
+    console.log('Move');
+    moves.splice(0, moves.length);
     notflying.splice(0, notflying.length);
     clearInterval(timer);
     let dx = 0, dy = 0;
-    const delta = 0.5;
+    const delta = 0.09;
     switch (direction) {
         case "left":
             for (var i = 0; i < FIELDSIZE; i++) {
@@ -266,11 +267,12 @@ function Move(direction) {
     var timer = setInterval(function () {
         context.clearRect(0, 0, canvas.width, canvas.height);
         DrawBackground(); // нарисуем все ячейки которые не двигались
-        if (moves.length === 0) {
+        if (moves.length === 0 || flying.length == 0) {
             clearInterval(timer);
             DrawBackground();
             if (addnewcell)
                 AddNewCell();
+            acceptKeys = true;
         }
         for (let j = 0; j < moves.length; j++) {
             let x1 = moves[j][0], y1 = moves[j][1], x2 = moves[j][2], y2 = moves[j][3];
@@ -284,7 +286,10 @@ function Move(direction) {
             moves[j][0] += dy;
             moves[j][1] += dx;
         }
-    }, 100);
+        speed++;
+    }, 50);
+    speed = 0;
+    console.log('out');
     // ShowMatrix(FIELDSIZE);
 }
 
@@ -299,7 +304,10 @@ function CreateMatrix(rows, columns) {
     return gameField;
 }
 
+var acceptKeys = true;
+
 function Direction(key) {
+    if (!acceptKeys) return;
     var direction;
     switch (key.keyCode) {
         case 37:  // если нажата клавиша влево
@@ -319,7 +327,8 @@ function Direction(key) {
             break;
     }
     if (direction === 'none' || moves.length != 0) return;
-    return Move(direction);
+    acceptKeys = false;
+    Move(direction);
 }
 
 function init() {
