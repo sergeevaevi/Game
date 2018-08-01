@@ -1,5 +1,5 @@
 const WINSCORE = 2048;
-const FIELDSIZE = 5;
+var FIELDSIZE = 4;
 const CELLSIZE = 100;
 const VICTORY = 2048;
 var gameField = CreateMatrix(FIELDSIZE, FIELDSIZE);
@@ -14,42 +14,44 @@ var moves = [];
 var dir = [-1, 0, 1, 0, 0, -1, 0, 1];
 var canvas = document.getElementById("matrix");
 var context = canvas.getContext("2d");
-canvas.width = 500;
-canvas.height = 500;
+canvas.width = FIELDSIZE*CELLSIZE;
+canvas.height = FIELDSIZE*CELLSIZE;
 var YouWin = false;
-
+ 
+ 
+ 
 function ShowScore() {
     var score = document.getElementById("scoreId");
     score.innerHTML = "Score: " + SCORE;
 }
-
+ 
 function show(state) {
     document.getElementById('window').style.display = state;
     document.getElementById('wrap1').style.display = state;
 }
-
+ 
 function showWindowEnd(dis) {
     document.getElementById('GameOverWindow').style.display = dis;
     document.getElementById('wrap2').style.display = dis;
 }
-
+ 
 function showWindowWin(win) {
     document.getElementById('YouWinWindow').style.display = win;
     document.getElementById('wrap3').style.display = win;
 }
-
+ 
 function delay() {
     document.location.reload();
 }
-
+ 
 function RandomDegree() {
     return Math.floor(Math.random() * 2) + 1;
 }
-
+ 
 function Random(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-
+ 
 function DrawNumber(number, posY, posX) {
     if ((number == VICTORY) && (YouWin == false)) {
         YouWin = true;
@@ -59,17 +61,19 @@ function DrawNumber(number, posY, posX) {
     context.textAlign = 'center';
     context.strokeText(number, (posX + 1) * CELLSIZE - CELLSIZE / 2, (posY + 1) * CELLSIZE - CELLSIZE / 2);
 }
-
+ 
 function DrawBackground() {
+    canvas.width = FIELDSIZE*CELLSIZE;
+    canvas.height = FIELDSIZE*CELLSIZE;
     context.fillStyle = "lightskyblue";
     context.fillRect(0, 0, canvas.width, canvas.height);
-    for (let x = CELLSIZE; x < 5 * CELLSIZE; x += CELLSIZE) {
+    for (let x = CELLSIZE; x < FIELDSIZE * CELLSIZE; x += CELLSIZE) {
         context.moveTo(x, 0);
         context.lineTo(x, 800);
     }
-    for (let y = 100; y < 500; y += 100) {
+    for (let y = CELLSIZE; y < FIELDSIZE*CELLSIZE; y += CELLSIZE) {
         context.moveTo(0, y);
-        context.lineTo(500, y);
+        context.lineTo(CELLSIZE*FIELDSIZE, y);
     }
     context.strokeStyle = "darkblue";
     context.stroke();
@@ -82,19 +86,18 @@ function DrawBackground() {
         DrawNumber(notflying[i][0], notflying[i][1], notflying[i][2]);
     }
 }
-
-function ShowMatrix(rows) {
+ 
+function ClearMatrix(rows) {
     for (let i = 0; i < rows; i++) {
-        console.log(gameField[i]);
+        gameField[i].splice(0, gameField[i].length);
     }
-    console.log('');
 }
-
-
+ 
+ 
 function IsEmpty(Y, X) {
     return (gameField[Y][X] === 0);
 }
-
+ 
 function CheckEmptyCells() {
     let flag = false;
     for (let i = 0; i < FIELDSIZE; i++) {
@@ -108,13 +111,13 @@ function CheckEmptyCells() {
     }
     return flag;
 }
-
+ 
 function AddNumber(Y, X) {
     gameField[Y][X] = Math.pow(2, RandomDegree());
     DrawNumber(gameField[Y][X], Y, X);
     notflying.push([gameField[Y][X], Y, X])
 }
-
+ 
 function AddNewCell() {
     EndGame();
     ShowScore();
@@ -126,14 +129,14 @@ function AddNewCell() {
         AddNumber(EmptyY, EmptyX);
     }
 }
-
+ 
 function CheckEdge(i, j, v, h) {
     if (i - v >= 0 && i - v < FIELDSIZE && j - h >= 0 && j - h < FIELDSIZE) {
         return true
     } else
         return false;
 }
-
+ 
 function IsEqual(vertic, horizon) {
     for (let i = 0; i < FIELDSIZE; i++)
         for (let j = 0; j < FIELDSIZE; j++) {
@@ -143,7 +146,7 @@ function IsEqual(vertic, horizon) {
         }
     return false;
 }
-
+ 
 function EndGame() {
     if (!CheckEmptyCells()) {
         for (let i = 0; i < dir.length; i += 2) {
@@ -154,12 +157,12 @@ function EndGame() {
         showWindowEnd('block');
     }
 }
-
+ 
 function AddFirstCell() {
     AddNewCell();
     AddNewCell();
 }
-
+ 
 function LetItMoves(i, j, Curr_i, Curr_j, Curr, offset_i, offset_j) {
     if (gameField[Curr_i][Curr_j] === 0 || gameField[Curr_i][Curr_j] === gameField[i][j]) {
         if (gameField[Curr_i][Curr_j] != 0)
@@ -178,9 +181,8 @@ function LetItMoves(i, j, Curr_i, Curr_j, Curr, offset_i, offset_j) {
     }
     gameField[i][j] = 0;
 }
-
+ 
 function Move(direction) {
-    console.log('Move');
     moves.splice(0, moves.length);
     notflying.splice(0, notflying.length);
     clearInterval(timer);
@@ -250,7 +252,7 @@ function Move(direction) {
                     while (i + Curr < FIELDSIZE - 1 && gameField[i + Curr][j] === 0) {
                         Curr++;
                     }
-
+ 
                     LetItMoves(i, j, i + Curr, j, Curr, -1, 0);
                 }
             }
@@ -263,7 +265,7 @@ function Move(direction) {
         var addnewcell = true;
     }
     EndGame();
-
+ 
     var timer = setInterval(function () {
         context.clearRect(0, 0, canvas.width, canvas.height);
         DrawBackground(); // нарисуем все ячейки которые не двигались
@@ -287,12 +289,12 @@ function Move(direction) {
             moves[j][1] += dx;
         }
         speed++;
-    }, 50);
+    }, 30);
     speed = 0;
     console.log('out');
     // ShowMatrix(FIELDSIZE);
 }
-
+ 
 function CreateMatrix(rows, columns) {
     gameField = new Array();
     for (let i = 0; i < rows; i++) {
@@ -303,9 +305,9 @@ function CreateMatrix(rows, columns) {
     }
     return gameField;
 }
-
+ 
 var acceptKeys = true;
-
+ 
 function Direction(key) {
     if (!acceptKeys) return;
     var direction;
@@ -330,12 +332,28 @@ function Direction(key) {
     acceptKeys = false;
     Move(direction);
 }
-
+ 
 function init() {
     DrawBackground();
     AddFirstCell();
     addEventListener("keydown", Direction);
 }
-
+ 
+function Update(sign) {
+    FIELDSIZE += sign;
+    moves.splice(0, moves.length);
+    flying.splice(0, flying.length);
+    notflying.splice(0, notflying.length);
+    gameField = CreateMatrix(FIELDSIZE, FIELDSIZE);
+    SCORE = 0;
+    init();
+}
+ 
+function resize(size){
+    if (size === '>'){
+        Update(1);
+    }else{
+        Update(-1);
+    }
+}
 init();
-
