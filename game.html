@@ -6,23 +6,31 @@
     <title>2048</title>
 </head>
 <body background="gameOverPic.jpg">
-
+ 
 <div class="imgblock" style="float:left; margin-right:50px; margin-top:50px;">
     <img src="SCORE.png">
     <h2><span id="scoreId"></span></h2>
 </div>
+<div id="buttonMain">
+    <button class="button2048" onclick="show('block')">Rules</button>
+    <button class="button2048" onclick="delay()">Restart</button></div>
+<br>
+<div  id="buttonSize">
+    <button class="button2048" onclick="resize('<')"> < </button>
+    <button class="button2048" onclick="resize('>')"> > </button></div>
+ 
 <h1>2048</h1>
 <canvas id="matrix"></canvas>
 <script src="init.js"></script>
-
+ 
 <!-- Задний прозрачный фон-->
 <div onclick="show('none')" id="wrap1"></div>
 <div onclick="showWindowWin('none')" id="wrap2"></div>
 <div onclick="showWindowEnd('none')" id="wrap3"></div>
-
+ 
 <!-- Само окно-->
 <div id="window">
-
+ 
     <img class="close" onclick="show('none')" src="p1.png">
     <h3>Правила игры:<br>
             <ul>
@@ -36,14 +44,14 @@
         <button class="button2048" onclick="show('none')">Вернуться к игре</button>
     </center>
 </div>
-
+ 
 <div id="GameOverWindow">
     <div class="clip-text clip-text_game_over clip-text--cover">GAME OVER</div>
     <center><button class="button2048" onclick="delay()">
         Новая игра</button>
     </center>
 </div>
-
+ 
 <div id="YouWinWindow">
     <div class="clip-text clip-text_you_win  clip-text--cover">YOU WIN!</div>
     <center><button class="button2048" onclick="delay()">
@@ -52,9 +60,6 @@
         Продолжить</button>
     </center>
 </div>
-
-<button class="button2048" onclick="show('block')">Rules</button>
-<button class="button2048" onclick="delay()">Restart</button>
-
+ 
 </body>
 </html>
