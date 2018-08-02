@@ -1,3 +1,15 @@
+.user {
+    width: 308px;
+    height: 35px;
+    padding: 0 10px;
+    border: darkblue;
+    margin-top: 10px;
+    border-radius: 15px;
+    font-size: 1em;
+    line-height: 46px;
+    font-family: AR DELANEY;
+}
+
 #buttonSize{
     align: center;
 }
@@ -13,11 +25,12 @@
     border-radius: 6px;
     background: cornflowerblue;
     transition: 0.2s;
+    margin-top: 10px;
     font-family: AR DELANEY;
     text-align: center;
 }
 .button2048:hover { background: darkslateblue; border-color: darkslateblue darkslateblue darkslateblue }
- 
+
 #wrap1{
  
     display: none;
@@ -125,6 +138,7 @@ canvas {
     bottom: 0;
     padding: 16px;
     border-color: darkmagenta;
+    font-family: AR DELANEY;
 }
 #GameOverWindow{
     width: 550px;
