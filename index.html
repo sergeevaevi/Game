@@ -4,15 +4,21 @@
     <link rel="stylesheet" href="main.css" type="text/css">
     <meta charset="UTF-8">
     <title>2048</title>
+    <style>
+        body{
+            background: url(gameOverPic.jpg);
+            background-size:100%
+        }
+    </style>
 </head>
-<body background="gameOverPic.jpg">
+<body>
  
 <div class="imgblock" style="float:left; margin-right:50px; margin-top:50px;">
     <img src="SCORE.png">
     <h2><span id="scoreId"></span></h2>
 </div>
 <div id="buttonMain">
-    <button class="button2048" onclick="show('block')">Rules</button>
+    <button class="button2048" onclick="showWindowRules('block')">Rules</button>
     <button class="button2048" onclick="delay()">Restart</button></div>
 <br>
 <div  id="buttonSize">
@@ -24,40 +30,40 @@
 <script src="init.js"></script>
  
 <!-- Задний прозрачный фон-->
-<div onclick="show('none')" id="wrap1"></div>
+<div onclick="showWindowRules('none')" id="wrap1"></div>
 <div onclick="showWindowWin('none')" id="wrap2"></div>
 <div onclick="showWindowEnd('none')" id="wrap3"></div>
  
 <!-- Само окно-->
 <div id="window">
  
-    <img class="close" onclick="show('none')" src="exit.png">
-    <h3>Правила игры:<br>
-            <ul>
-            <li>Управление происходит с помощью клавиш на клавиатуре: "вверх", "вниз", "вправо", "влево"<br></li>
-            <li>За каждое соединение одинаковых цифр вы получаете очки, которые увеличиваются на номинал получившегося соединения</li>
-            <li>Игра заканчивается поражением, когда после очередного хода невозможно совершить какое-либо действие</li>
-            <li>Вы выигрываете, после того, как соединили два числа 1024, т.е. получили поле с цифрой 2048!</li>
-            </ul>
-            <center>Успехов!</center>
+    <img class="close" onclick="showWindowRules('none')" src="p1.png">
+    <h3>Rules:<br>
+    <ul>
+        <li>Use four arrow keys<br></li>
+        <li> If two tiles of the same number collide while moving, they will merge into a tile with the total value of the two tiles that collided</li>
+        <li>The game ends when the player has no moves (there are no empty spaces and no adjacent tiles with the same value) </li>
+        <li>The game is won when a tile with a value of 2048 appears on the board</li>
+    </ul>
+            <center>Good Luck!</center>
     </h3><center>
-        <button class="button2048" onclick="show('none')">Вернуться к игре</button>
+        <button class="button2048" onclick="showWindowRules('none')">Back to game</button>
     </center>
 </div>
  
 <div id="GameOverWindow">
     <div class="clip-text clip-text_game_over clip-text--cover">GAME OVER</div>
     <center><button class="button2048" onclick="delay()">
-        Новая игра</button>
+        New Game</button>
     </center>
 </div>
  
 <div id="YouWinWindow">
     <div class="clip-text clip-text_you_win  clip-text--cover">YOU WIN!</div>
     <center><button class="button2048" onclick="delay()">
-        Новая игра</button>
+        New Game</button>
     <button class="button2048" onclick="showWindowWin('none')">
-        Продолжить</button>
+        Continue</button>
     </center>
 </div>
  
