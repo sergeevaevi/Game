@@ -53,6 +53,7 @@ function Random(min, max) {
 }
  
 function DrawNumber(number, posY, posX) {
+    EndGame();
     if ((number == VICTORY) && (YouWin == false)) {
         YouWin = true;
         showWindowWin('block');
@@ -69,7 +70,7 @@ function DrawBackground() {
     context.fillRect(0, 0, canvas.width, canvas.height);
     for (let x = CELLSIZE; x < FIELDSIZE * CELLSIZE; x += CELLSIZE) {
         context.moveTo(x, 0);
-        context.lineTo(x, 800);
+        context.lineTo(x, FIELDSIZE * CELLSIZE);
     }
     for (let y = CELLSIZE; y < FIELDSIZE*CELLSIZE; y += CELLSIZE) {
         context.moveTo(0, y);
@@ -264,7 +265,6 @@ function Move(direction) {
     } else {
         var addnewcell = true;
     }
-    EndGame();
  
     var timer = setInterval(function () {
         context.clearRect(0, 0, canvas.width, canvas.height);
@@ -288,11 +288,7 @@ function Move(direction) {
             moves[j][0] += dy;
             moves[j][1] += dx;
         }
-        speed++;
     }, 30);
-    speed = 0;
-    console.log('out');
-    // ShowMatrix(FIELDSIZE);
 }
  
 function CreateMatrix(rows, columns) {
@@ -350,9 +346,11 @@ function Update(sign) {
 }
  
 function resize(size){
-    if (size === '>'){
+    if (size === '>') {
+        if(FIELDSIZE < 6)
         Update(1);
-    }else{
+    } else {
+        if(FIELDSIZE>3)
         Update(-1);
     }
 }
