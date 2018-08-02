@@ -28,6 +28,8 @@
     margin-top: 10px;
     font-family: AR DELANEY;
     text-align: center;
+    width: 200px;
+    height: 35px;
 }
 .button2048:hover { background: darkslateblue; border-color: darkslateblue darkslateblue darkslateblue }
 
@@ -93,6 +95,7 @@
 canvas {
     border: 5px solid darkblue;
     margin: 10px;
+    margin-top: 0;
     margin-left: 25%;
 }
  
@@ -107,22 +110,24 @@ canvas {
 .imgblock img {
     height: 160px;
     width: 250px;
+    margin-bottom: 0;
 }
  
 .imgblock h2 {
-    left: 0;
     position: absolute;
-    top: 30px;
+    top: 40px;
     width: 100%;
     left: 35px;
+    margin-bottom: 0;
 }
 .imgblock h2 span {
-    background: darkblue;
     border-radius: 5px;
-    color: lightskyblue;
+    color: darkblue;
     font: 28px AR DELANEY;
     line-height: 29px;
     padding: 2px 2px;
+    margin-left: 28px;
+    margin-bottom: 0;
 }
 #SignWindow{
     width: 550px;
@@ -194,6 +199,7 @@ canvas {
     margin: .25em;
     padding: .5em .75em;
     text-align: center;
+    font-family: AR DELANEY;
     /* Color fallback */
     color: #fff;
     -webkit-background-clip: text;
@@ -246,6 +252,7 @@ canvas {
 h1{
     font: 40px AR DELANEY;
     color: cornflowerblue;
+    margin-bottom: 7px;
 }
 h3{
     font: 16px AR DELANEY;
@@ -258,3 +265,4 @@ button{
     color: black;
     font-size: medium;
 }
+
