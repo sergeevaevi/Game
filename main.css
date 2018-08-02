@@ -48,8 +48,7 @@
     overflow: auto;
 }
  
-#wrap3{
- 
+#wrap3, #wrap4{
     display: none;
     opacity: 0.8;
     position: fixed;
@@ -112,7 +111,21 @@ canvas {
     line-height: 29px;
     padding: 2px 2px;
 }
- 
+#SignWindow{
+    width: 550px;
+    height: 400px;
+    margin: 50px auto;
+    background: lightskyblue;
+    z-index: 200;
+    position: fixed;
+    left: 0;
+    right: 0;
+    display: none;
+    top: 0;
+    bottom: 0;
+    padding: 16px;
+    border-color: darkmagenta;
+}
 #GameOverWindow{
     width: 550px;
     height: 400px;
@@ -157,7 +170,7 @@ canvas {
     width: 100px;
     cursor: pointer;
 }
-/* Clip text element */
+
 .clip-text {
     font-size: 6em;
     font-weight: bold;
