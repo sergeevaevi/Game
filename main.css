@@ -68,7 +68,7 @@
     width: 400px;
     height: 400px;
     margin: 50px auto;
-    background: #FFEFD5;
+    background: lightskyblue;
     z-index: 200;
     position: fixed;
     left: 0;
@@ -117,7 +117,7 @@ canvas {
     width: 550px;
     height: 400px;
     margin: 50px auto;
-    background: #FFEFD5;
+    background: lightskyblue;
     z-index: 200;
     position: fixed;
     left: 0;
@@ -132,7 +132,7 @@ canvas {
     width: 550px;
     height: 400px;
     margin: 50px auto;
-    background: #FFEFD5;
+    background: lightskyblue;
     z-index: 200;
     position: fixed;
     left: 0;
