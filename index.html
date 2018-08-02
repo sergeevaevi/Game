@@ -10,6 +10,20 @@
             background-size:100%
         }
     </style>
+    <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyA50i91L637Du8ra3TKe6azFFNGRG4fYu8",
+            authDomain: "game2048-825f0.firebaseapp.com",
+            databaseURL: "https://game2048-825f0.firebaseio.com",
+            projectId: "game2048-825f0",
+            storageBucket: "game2048-825f0.appspot.com",
+            messagingSenderId: "111411969252"
+        };
+        firebase.initializeApp(config);
+    </script>
+
 </head>
 <body>
  
@@ -20,19 +34,39 @@
 <div id="buttonMain">
     <button class="button2048" onclick="showWindowRules('block')">About</button>
     <button class="button2048" onclick="delay()">Restart</button></div>
+    <button class="button2048" id="signOutBtn" onclick="">Sign Out</button></div>
 <br>
-<div  id="buttonSize">
+<div id="buttonSize">
     <button class="button2048" onclick="resize('<')"> < </button>
     <button class="button2048" onclick="resize('>')"> > </button></div>
  
 <h1>2048</h1>
 <canvas id="matrix"></canvas>
+<div id="wrap4"></div>
+<div id="SignWindow">
+    <style>
+        .hide{
+            visibility: hidden;
+        }
+    </style>
+    <fieldset id="registration">
+        <input type="email" placeholder="user@example.com" id="txtEmail">
+        <input type="password" placeholder="password" id="txtPassword">
+        <button id="signInBtn" onclick="signIn();"> Sign In </button>
+        <button id="signUpBtn" onclick="signUp();" >Sign Up</button>
+
+    </fieldset>
+
+</div>
+<script src="auth.js"></script>
 <script src="init.js"></script>
- 
+
+
 <!-- Задний прозрачный фон-->
 <div onclick="showWindowRules('none')" id="wrap1"></div>
 <div onclick="showWindowWin('none')" id="wrap2"></div>
 <div onclick="showWindowEnd('none')" id="wrap3"></div>
+
  
 <!-- Само окно-->
 <div id="window">
@@ -58,7 +92,8 @@
         New Game</button>
     </center>
 </div>
- 
+
+
 <div id="YouWinWindow">
     <div class="clip-text clip-text_you_win  clip-text--cover">YOU WIN!</div>
     <center><button class="button2048" onclick="delay()">
@@ -67,6 +102,28 @@
         Continue</button>
     </center>
 </div>
- 
+
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

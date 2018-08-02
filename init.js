@@ -24,7 +24,7 @@ function ShowScore() {
     var score = document.getElementById("scoreId");
     score.innerHTML = "Score: " + SCORE;
 }
- 
+
 function showWindowRules(state) {
     document.getElementById('window').style.display = state;
     document.getElementById('wrap1').style.display = state;
@@ -354,4 +354,11 @@ function resize(size){
         Update(-1);
     }
 }
+
+function showWindowSign(state){
+    document.getElementById('SignWindow').style.display = state;
+    document.getElementById('wrap4').style.display = state;
+}
+
+showWindowSign('block');
 init();
