@@ -25,7 +25,7 @@ function ShowScore() {
     score.innerHTML = "Score: " + SCORE;
 }
  
-function show(state) {
+function showWindowRules(state) {
     document.getElementById('window').style.display = state;
     document.getElementById('wrap1').style.display = state;
 }
