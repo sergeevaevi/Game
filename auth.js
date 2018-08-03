@@ -14,9 +14,6 @@ function Database(score, player) {
         'name': player,
     });
     data.child('points').on('value', snap => console.log(snap.val()));
-  //  firebase.database().ref().child('players').update({
-    //    'current': player,
-//})
 }
 
 function signUp() {
@@ -37,11 +34,7 @@ function signUp() {
          var errorMessage = error.message;
          console.log(error.message);
      });
-     /*firebase.database().ref().child('players').update({
-         'current': ({
-             'name': email.replace(/\./g, ','),
-         })
- })*/
+
  }
 signOutBtn.addEventListener('click', e => {
     firebase.auth().signOut();

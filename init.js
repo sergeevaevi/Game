@@ -18,6 +18,33 @@ canvas.width = FIELDSIZE*CELLSIZE;
 canvas.height = FIELDSIZE*CELLSIZE;
 var YouWin = false;
 
+function showWindowLeaderboard(state) {
+    document.getElementById('LBWindow').style.display = state;
+    if (state === 'block'){
+        firebase.database().ref('players/').once('value').then(function (snapshot) {
+            results = (snapshot.val());
+            var step = 0;
+            for (let key in results) {
+                document.getElementById('LB').innerHTML = '<tr>';
+                step++;
+                if (step === 1) continue;
+                if (step > 10) break;
+                let names = firebase.database().ref("players/"+key+'/name').once('value').then(function (snapshot) {
+                    res = (snapshot.val());
+                    document.getElementById('LB').innerHTML += '<td >' +res+':'+'</td>';
+                });
+                let scores = firebase.database().ref("players/"+key+'/points').once('value').then(function (snapshot) {
+                    res = (snapshot.val());
+                    console.log(res);
+                    document.getElementById('LB').innerHTML += '<td >' +res+'</td>';
+                });
+                document.getElementById('LB').innerHTML += '</tr>';
+            }
+        });
+    }
+    document.getElementById('wrap5').style.display = state;
+}
+
 
 function getEmail() {
     var ref = firebase.database().ref("players/current");
@@ -36,7 +63,6 @@ function getEmail() {
         });
 }
 
-
 function Database(score, player) {
     var data = firebase.database().ref().child('players');
     data = firebase.database().ref().child('players').child(player);
@@ -44,6 +70,8 @@ function Database(score, player) {
         'points': score,
         'name': player,
     });
+    var ref = firebase.database().ref("players");
+    ref.orderByChild("points");
 }
 
 function ShowScore() {

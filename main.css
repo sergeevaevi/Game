@@ -1,3 +1,15 @@
+.user {
+    width: 308px;
+    height: 35px;
+    padding: 0 10px;
+    border: darkblue;
+    margin-top: 10px;
+    border-radius: 15px;
+    font-size: 1em;
+    line-height: 46px;
+    font-family: AR DELANEY;
+}
+
 #buttonSize{
     align: center;
 }
@@ -13,11 +25,14 @@
     border-radius: 6px;
     background: cornflowerblue;
     transition: 0.2s;
+    margin-top: 10px;
     font-family: AR DELANEY;
     text-align: center;
+    width: 200px;
+    height: 35px;
 }
 .button2048:hover { background: darkslateblue; border-color: darkslateblue darkslateblue darkslateblue }
- 
+
 #wrap1{
  
     display: none;
@@ -32,7 +47,13 @@
     z-index: 100;
     overflow: auto;
 }
- 
+
+#LB{
+    font-family: AR DELANEY;
+    text-align: center;
+    font-size: 20px;
+}
+
 #wrap2{
  
     display: none;
@@ -48,7 +69,7 @@
     overflow: auto;
 }
  
-#wrap3, #wrap4{
+#wrap3, #wrap4, #wrap5{
     display: none;
     opacity: 0.8;
     position: fixed;
@@ -63,7 +84,6 @@
 }
  
 #window{
- 
     width: 400px;
     height: 400px;
     margin: 50px auto;
@@ -80,6 +100,7 @@
 canvas {
     border: 5px solid darkblue;
     margin: 10px;
+    margin-top: 0;
     margin-left: 25%;
 }
  
@@ -94,24 +115,26 @@ canvas {
 .imgblock img {
     height: 160px;
     width: 250px;
+    margin-bottom: 0;
 }
  
 .imgblock h2 {
-    left: 0;
     position: absolute;
-    top: 30px;
+    top: 40px;
     width: 100%;
     left: 35px;
+    margin-bottom: 0;
 }
 .imgblock h2 span {
-    background: darkblue;
     border-radius: 5px;
-    color: lightskyblue;
+    color: darkblue;
     font: 28px AR DELANEY;
     line-height: 29px;
     padding: 2px 2px;
+    margin-left: 28px;
+    margin-bottom: 0;
 }
-#SignWindow{
+#SignWindow, #LBWindow{
     width: 550px;
     height: 400px;
     margin: 50px auto;
@@ -125,6 +148,7 @@ canvas {
     bottom: 0;
     padding: 16px;
     border-color: darkmagenta;
+    font-family: AR DELANEY;
 }
 #GameOverWindow{
     width: 550px;
@@ -180,6 +204,7 @@ canvas {
     margin: .25em;
     padding: .5em .75em;
     text-align: center;
+    font-family: AR DELANEY;
     /* Color fallback */
     color: #fff;
     -webkit-background-clip: text;
@@ -232,6 +257,7 @@ canvas {
 h1{
     font: 40px AR DELANEY;
     color: cornflowerblue;
+    margin-bottom: 7px;
 }
 h3{
     font: 16px AR DELANEY;
@@ -244,3 +270,4 @@ button{
     color: black;
     font-size: medium;
 }
+

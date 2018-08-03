@@ -38,7 +38,9 @@
 <br>
 <div id="buttonSize">
     <button class="button2048" onclick="resize('<')"> < </button>
-    <button class="button2048" onclick="resize('>')"> > </button></div>
+    <button class="button2048" onclick="resize('>')"> > </button>
+    <button class="button2048" onclick="showWindowLeaderboard('block')"> Leaderboard </button>
+</div>
  
 <h1>2048</h1>
 <canvas id="matrix"></canvas>
@@ -49,18 +51,25 @@
             visibility: hidden;
         }
     </style>
-    <fieldset id="registration">
-        <input type="email" placeholder="user@example.com" id="txtEmail">
-        <input type="password" placeholder="password" id="txtPassword">
-        <button id="signInBtn" onclick="signIn();"> Sign In </button>
-        <button id="signUpBtn" onclick="signUp();" >Sign Up</button>
-
-    </fieldset>
-
+    <center><h1>Log in!</h1><br>
+        <input type="email" class="user" placeholder="user@example.com" id="txtEmail">
+        <input type="password" class="user" placeholder="password" id="txtPassword"><br>
+        <button id="signInBtn" class="button2048" onclick="signIn();"> Sign In </button>
+        <button id="signUpBtn" class="button2048" onclick="signUp();" >Sign Up</button>
+    </center>
 </div>
+
+
 <script src="auth.js"></script>
 <script src="init.js"></script>
 
+<div id="LBWindow">
+    <table align="center" id="LB">
+        <h1 align="center">Leaders</h1>
+    </table>
+</div>
+
+<div onclick="showWindowLeaderboard('none')" id="wrap5"></div>
 
 <!-- Задний прозрачный фон-->
 <div onclick="showWindowRules('none')" id="wrap1"></div>
@@ -70,15 +79,11 @@
  
 <!-- Само окно-->
 <div id="window">
- 
-    <img class="close" onclick="showWindowRules('none')" src="exit.png">
     <h3>Rules:<br>
-    <ul>
-        <li>Use four arrow keys<br></li>
-        <li> If two tiles of the same number collide while moving, they will merge into a tile with the total value of the two tiles that collided</li>
-        <li>The game ends when the player has no moves (there are no empty spaces and no adjacent tiles with the same value) </li>
-        <li>The game is won when a tile with a value of 2048 appears on the board</li>
-    </ul>
+        Use four arrow keys<br>
+        If two tiles of the same number collide while moving, they will merge into a tile with the total value of the two tiles that collided
+        The game ends when the player has no moves (there are no empty spaces and no adjacent tiles with the same value)
+        The game is won when a tile with a value of 2048 appears on the board
             <center>Good Luck!</center>
          <center><font color="#191970">Authors: Sergeeva Elena, Chepurina Arina, Sim Anastasia</font></center>
     </h3><center>
@@ -102,10 +107,9 @@
         Continue</button>
     </center>
 </div>
-<p id = 'nick'></p>
+
 </body>
 </html>
-
 
 
 
