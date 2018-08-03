@@ -33,7 +33,7 @@
 }
 .button2048:hover { background: darkslateblue; border-color: darkslateblue darkslateblue darkslateblue }
 
-#wrap1{
+#wrap1, #wrap2, #wrap3, #wrap4{
  
     display: none;
     opacity: 0.8;
@@ -47,36 +47,6 @@
     z-index: 100;
     overflow: auto;
 }
- 
-#wrap2{
- 
-    display: none;
-    opacity: 0.8;
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    padding: 16px;
-    background-color: rgba(1, 1, 1, 0.725);
-    z-index: 100;
-    overflow: auto;
-}
- 
-#wrap3, #wrap4{
-    display: none;
-    opacity: 0.8;
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    padding: 16px;
-    background-color: rgba(1, 1, 1, 0.725);
-    z-index: 100;
-    overflow: auto;
-}
- 
 #window{
  
     width: 400px;
